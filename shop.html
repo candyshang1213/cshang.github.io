@@ -1,0 +1,56 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>全部商品 | CShang</title><meta name="description" content="CShang 羽毛球服饰官方商城。"><link rel="stylesheet" href="assets/style.css"></head><body>
+<div class="topbar">CShang 新品系列上线 · 首单享专属优惠 · 为每一次挥拍而生</div>
+<header class="nav"><div class="nav-inner">
+<button class="iconbtn mobile" onclick="location.href='shop.html'">☰</button>
+<a class="logo" href="index.html">C<span>Shang</span></a>
+<nav class="navlinks">
+<a href="shop.html?category=new">新品</a><a href="shop.html?category=competition">比赛服</a><a href="shop.html?category=training">训练服</a><a href="shop.html?gender=men">男款</a><a href="shop.html?gender=women">女款</a><a href="shop.html?category=team">队服定制</a>
+</nav>
+<div class="actions"><button class="iconbtn" onclick="alert('搜索功能已预留，可继续接入全文搜索。')">⌕</button><button class="iconbtn" onclick="openCart()">🛒<sup class="cart-count" id="cartCount">0</sup></button></div>
+</div></header>
+
+<section class="page-head"><div class="wrap"><div class="kicker">SHOP CSHANG</div><h1>羽毛球服饰</h1><p>比赛、训练与球队定制，从这里开始。</p></div></section>
+<main class="wrap shop-layout">
+<aside class="filters">
+<div class="filter-group"><h4>系列</h4><label class="check"><input type="checkbox" value="competition" data-filter="category"> 比赛系列</label><label class="check"><input type="checkbox" value="training" data-filter="category"> 训练系列</label><label class="check"><input type="checkbox" value="team" data-filter="category"> 团队 / 定制</label></div>
+<div class="filter-group"><h4>性别</h4><label class="check"><input type="checkbox" value="men" data-filter="gender"> 男款</label><label class="check"><input type="checkbox" value="women" data-filter="gender"> 女款</label><label class="check"><input type="checkbox" value="unisex" data-filter="gender"> 中性</label></div>
+<div class="filter-group"><h4>价格</h4><label class="check"><input type="checkbox" value="0-150" data-filter="price"> ¥150 以下</label><label class="check"><input type="checkbox" value="150-200" data-filter="price"> ¥150–200</label><label class="check"><input type="checkbox" value="200-9999" data-filter="price"> ¥200 以上</label></div>
+<a class="btn" href="team.html" style="display:block;text-align:center">球队定制</a>
+</aside>
+<section><div class="sortbar"><span id="resultCount" class="muted"></span><select class="select" id="sort"><option value="recommended">推荐排序</option><option value="priceAsc">价格：低到高</option><option value="priceDesc">价格：高到低</option><option value="new">新品优先</option></select></div><div class="products" id="shopProducts"></div></section>
+</main>
+
+<footer class="footer"><div class="wrap">
+<div class="footer-grid">
+<div><div class="logo">C<span>Shang</span></div><p>羽毛球服饰 · 为每一次挥拍而生。</p></div>
+<div><h4>购物</h4><a href="shop.html?category=new">新品系列</a><br><a href="shop.html">全部产品</a><br><a href="shop.html?gender=men">男款</a><br><a href="shop.html?gender=women">女款</a></div>
+<div><h4>服务</h4><a href="#">尺码指南</a><br><a href="#">配送说明</a><br><a href="#">退换政策</a><br><a href="about.html">关于 CShang</a></div>
+<div><h4>品牌合作</h4><a href="team.html">俱乐部 / 球队定制</a><br><p>service@cshang.com</p></div>
+</div><div class="copy">© 2026 CShang. All rights reserved.</div>
+</div></footer>
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer"><div class="drawer-head"><h2>购物袋</h2><button class="iconbtn" onclick="closeCart()">×</button></div><div class="drawer-items" id="cartItems"></div><div class="total"><div class="total-row"><span>合计</span><span id="drawerTotal">¥0</span></div><a class="btn dark" style="display:block;text-align:center" href="checkout.html">去结算</a></div></aside>
+<script src="assets/app.js"></script>
+<script>
+function renderShop(){
+ let list=[...PRODUCTS], q=queryParams(), category=q.get("category"), gender=q.get("gender");
+ const cats=[...document.querySelectorAll('[data-filter="category"]:checked')].map(x=>x.value);
+ const genders=[...document.querySelectorAll('[data-filter="gender"]:checked')].map(x=>x.value);
+ const prices=[...document.querySelectorAll('[data-filter="price"]:checked')].map(x=>x.value);
+ if(category && category!=="new") cats.push(category);
+ if(gender) genders.push(gender);
+ if(cats.length) list=list.filter(p=>cats.includes(p.category));
+ if(genders.length) list=list.filter(p=>genders.includes(p.gender));
+ if(prices.length) list=list.filter(p=>prices.some(r=>{let [a,b]=r.split("-").map(Number);return p.price>=a&&p.price<=b}));
+ const sort=document.getElementById("sort").value;
+ if(sort==="priceAsc")list.sort((a,b)=>a.price-b.price);
+ if(sort==="priceDesc")list.sort((a,b)=>b.price-a.price);
+ if(sort==="new")list.sort((a,b)=>(b.tag==="NEW")-(a.tag==="NEW"));
+ document.getElementById("shopProducts").innerHTML=list.map(productCard).join("")||'<div class="empty" style="grid-column:1/-1"><h3>没有找到符合条件的商品</h3><p class="muted">试试清除筛选条件。</p></div>';
+ document.getElementById("resultCount").textContent=`${list.length} 件商品`;
+}
+document.querySelectorAll("[data-filter]").forEach(x=>x.addEventListener("change",renderShop));
+document.getElementById("sort").addEventListener("change",renderShop);
+renderShop();initShell();
+</script>
+</body></html>

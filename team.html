@@ -1,0 +1,25 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>球队定制 | CShang</title><meta name="description" content="CShang 羽毛球服饰官方商城。"><link rel="stylesheet" href="assets/style.css"></head><body>
+<div class="topbar">CShang 新品系列上线 · 首单享专属优惠 · 为每一次挥拍而生</div>
+<header class="nav"><div class="nav-inner">
+<button class="iconbtn mobile" onclick="location.href='shop.html'">☰</button>
+<a class="logo" href="index.html">C<span>Shang</span></a>
+<nav class="navlinks">
+<a href="shop.html?category=new">新品</a><a href="shop.html?category=competition">比赛服</a><a href="shop.html?category=training">训练服</a><a href="shop.html?gender=men">男款</a><a href="shop.html?gender=women">女款</a><a href="shop.html?category=team">队服定制</a>
+</nav>
+<div class="actions"><button class="iconbtn" onclick="alert('搜索功能已预留，可继续接入全文搜索。')">⌕</button><button class="iconbtn" onclick="openCart()">🛒<sup class="cart-count" id="cartCount">0</sup></button></div>
+</div></header>
+
+<section class="page-head"><div class="wrap"><div class="kicker">CSHANG TEAM</div><h1>俱乐部 / 球队定制</h1><p>高校、羽毛球俱乐部、企业球队，统一设计与采购。</p></div></section>
+<section class="section"><div class="wrap" style="max-width:900px"><div class="notice">团队订单可以提供颜色搭配、队徽、号码、姓名等定制服务。正式生产前会确认打样与尺码表。</div><div class="form-card"><h2>提交定制需求</h2><form onsubmit="event.preventDefault();alert('需求已记录（演示版）。正式版可写入 Supabase CRM / team_orders 表。')"><div class="field"><label>俱乐部 / 球队名称</label><input required></div><div class="field"><label>联系人</label><input required></div><div class="field"><label>联系电话</label><input required></div><div class="field"><label>预计数量</label><input type="number" min="1" required></div><div class="field"><label>需求说明</label><textarea placeholder="例如：男款20件、女款15件，需要队徽和号码。"></textarea></div><button class="btn dark">提交需求</button></form></div></div></section>
+
+<footer class="footer"><div class="wrap">
+<div class="footer-grid">
+<div><div class="logo">C<span>Shang</span></div><p>羽毛球服饰 · 为每一次挥拍而生。</p></div>
+<div><h4>购物</h4><a href="shop.html?category=new">新品系列</a><br><a href="shop.html">全部产品</a><br><a href="shop.html?gender=men">男款</a><br><a href="shop.html?gender=women">女款</a></div>
+<div><h4>服务</h4><a href="#">尺码指南</a><br><a href="#">配送说明</a><br><a href="#">退换政策</a><br><a href="about.html">关于 CShang</a></div>
+<div><h4>品牌合作</h4><a href="team.html">俱乐部 / 球队定制</a><br><p>service@cshang.com</p></div>
+</div><div class="copy">© 2026 CShang. All rights reserved.</div>
+</div></footer>
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer"><div class="drawer-head"><h2>购物袋</h2><button class="iconbtn" onclick="closeCart()">×</button></div><div class="drawer-items" id="cartItems"></div><div class="total"><div class="total-row"><span>合计</span><span id="drawerTotal">¥0</span></div><a class="btn dark" style="display:block;text-align:center" href="checkout.html">去结算</a></div></aside>
+<script src="assets/app.js"></script><script>initShell();</script></body></html>

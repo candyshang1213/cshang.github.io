@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>商品详情 | CShang</title><meta name="description" content="CShang 羽毛球服饰官方商城。"><link rel="stylesheet" href="assets/style.css"></head><body>
+<div class="topbar">CShang 新品系列上线 · 首单享专属优惠 · 为每一次挥拍而生</div>
+<header class="nav"><div class="nav-inner">
+<button class="iconbtn mobile" onclick="location.href='shop.html'">☰</button>
+<a class="logo" href="index.html">C<span>Shang</span></a>
+<nav class="navlinks">
+<a href="shop.html?category=new">新品</a><a href="shop.html?category=competition">比赛服</a><a href="shop.html?category=training">训练服</a><a href="shop.html?gender=men">男款</a><a href="shop.html?gender=women">女款</a><a href="shop.html?category=team">队服定制</a>
+</nav>
+<div class="actions"><button class="iconbtn" onclick="alert('搜索功能已预留，可继续接入全文搜索。')">⌕</button><button class="iconbtn" onclick="openCart()">🛒<sup class="cart-count" id="cartCount">0</sup></button></div>
+</div></header>
+
+<main class="wrap detail" id="detail"></main>
+
+<footer class="footer"><div class="wrap">
+<div class="footer-grid">
+<div><div class="logo">C<span>Shang</span></div><p>羽毛球服饰 · 为每一次挥拍而生。</p></div>
+<div><h4>购物</h4><a href="shop.html?category=new">新品系列</a><br><a href="shop.html">全部产品</a><br><a href="shop.html?gender=men">男款</a><br><a href="shop.html?gender=women">女款</a></div>
+<div><h4>服务</h4><a href="#">尺码指南</a><br><a href="#">配送说明</a><br><a href="#">退换政策</a><br><a href="about.html">关于 CShang</a></div>
+<div><h4>品牌合作</h4><a href="team.html">俱乐部 / 球队定制</a><br><p>service@cshang.com</p></div>
+</div><div class="copy">© 2026 CShang. All rights reserved.</div>
+</div></footer>
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer"><div class="drawer-head"><h2>购物袋</h2><button class="iconbtn" onclick="closeCart()">×</button></div><div class="drawer-items" id="cartItems"></div><div class="total"><div class="total-row"><span>合计</span><span id="drawerTotal">¥0</span></div><a class="btn dark" style="display:block;text-align:center" href="checkout.html">去结算</a></div></aside>
+<script src="assets/app.js"></script>
+<script>
+const p=getProduct(queryParams().get("slug"))||PRODUCTS[0];
+document.getElementById("detail").innerHTML=`
+<div><div class="detail-img" style="--c:${p.color}"></div></div>
+<div>
+<div class="kicker">${p.tag||"CSHANG"} / BADMINTON</div><h1>${p.name}</h1><p class="muted">${p.desc}</p>
+<div class="detail-price">${money(p.price)}</div>
+<div class="option-title">颜色</div><div class="chips" id="colors">${p.colors.map((c,i)=>`<button class="chip ${i===0?'active':''}" data-color="${c}">${c}</button>`).join("")}</div>
+<div class="option-title">尺码</div><div class="chips" id="sizes">${p.sizes.map((s,i)=>`<button class="chip ${i===1?'active':''}" data-size="${s}">${s}</button>`).join("")}</div>
+<div class="option-title">数量</div><div class="qty"><button id="minus">−</button><span id="qty">1</span><button id="plus">+</button></div>
+<div class="detail-actions"><button class="btn dark" id="add">加入购物袋</button><a class="btn" href="checkout.html">直接结算</a></div>
+<div class="info-box"><b>配送</b><br>现货商品预计 1–3 个工作日发出。球队定制商品请联系客服确认生产周期。<br><br><b>售后</b><br>保持商品吊牌完整且未使用，可按商城退换政策申请。</div>
+</div>`;
+let size=p.sizes[1]||p.sizes[0],color=p.colors[0],qty=1;
+document.querySelectorAll("[data-size]").forEach(b=>b.onclick=()=>{size=b.dataset.size;document.querySelectorAll("[data-size]").forEach(x=>x.classList.remove("active"));b.classList.add("active")});
+document.querySelectorAll("[data-color]").forEach(b=>b.onclick=()=>{color=b.dataset.color;document.querySelectorAll("[data-color]").forEach(x=>x.classList.remove("active"));b.classList.add("active")});
+document.getElementById("minus").onclick=()=>{qty=Math.max(1,qty-1);document.getElementById("qty").textContent=qty};
+document.getElementById("plus").onclick=()=>{qty++;document.getElementById("qty").textContent=qty};
+document.getElementById("add").onclick=()=>addCart(p,size,color,qty);
+initShell();
+</script>
+</body></html>

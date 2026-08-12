@@ -1,0 +1,38 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>官方商城 | CShang</title><meta name="description" content="CShang 羽毛球服饰官方商城。"><link rel="stylesheet" href="assets/style.css"></head><body>
+<div class="topbar">CShang 新品系列上线 · 首单享专属优惠 · 为每一次挥拍而生</div>
+<header class="nav"><div class="nav-inner">
+<button class="iconbtn mobile" onclick="location.href='shop.html'">☰</button>
+<a class="logo" href="index.html">C<span>Shang</span></a>
+<nav class="navlinks">
+<a href="shop.html?category=new">新品</a><a href="shop.html?category=competition">比赛服</a><a href="shop.html?category=training">训练服</a><a href="shop.html?gender=men">男款</a><a href="shop.html?gender=women">女款</a><a href="shop.html?category=team">队服定制</a>
+</nav>
+<div class="actions"><button class="iconbtn" onclick="alert('搜索功能已预留，可继续接入全文搜索。')">⌕</button><button class="iconbtn" onclick="openCart()">🛒<sup class="cart-count" id="cartCount">0</sup></button></div>
+</div></header>
+
+<section class="hero"><div class="wrap hero-grid"><div>
+<div class="kicker">CSHANG BADMINTON / 2026 COLLECTION</div>
+<h1>轻一点。<br><em>快一点。</em><br>再多赢一拍。</h1>
+<p>专为羽毛球运动设计的自有品牌。轻量面料、快速排汗、自由活动剪裁，让每一次启动、急停和挥拍都更自在。</p>
+<div class="cta"><a class="btn dark" href="shop.html?category=new">探索新品</a><a class="btn" href="about.html">了解 CShang</a></div>
+</div><div class="hero-art"><div class="shirt"><i class="sleeve left"></i><i class="sleeve right"></i></div><div class="hero-note">AIR-MOVE 01 · 比赛级轻量面料</div></div></div></section>
+<section class="section"><div class="wrap"><div class="section-title"><div><h2>按你的打法选择</h2><p>从训练到比赛，一套衣服解决你的运动场景。</p></div></div>
+<div class="categories">
+<a class="cat" href="shop.html?category=competition"><i></i><strong>比赛系列</strong><span>轻量 · 修身 · 快速排汗</span></a>
+<a class="cat" href="shop.html?category=training"><i></i><strong>训练系列</strong><span>耐穿 · 舒适 · 日常高频</span></a>
+<a class="cat" href="shop.html?gender=women"><i></i><strong>女款</strong><span>针对女性运动体态设计</span></a>
+<a class="cat" href="shop.html?gender=men"><i></i><strong>男款</strong><span>大幅度动作自由不束缚</span></a>
+</div></div></section>
+<section class="section" style="padding-top:0"><div class="wrap"><div class="section-title"><div><h2>热门单品</h2><p>Badminton essentials / CShang</p></div><a class="btn" href="shop.html">查看全部</a></div><div class="products" id="featured"></div></div></section>
+<section class="story"><div class="wrap story-grid"><div><div class="kicker" style="color:#79cbb5">WHY CSHANG</div><h2>不是为了看起来像运动员。<br>而是为了真正去打球。</h2><p>CShang 从羽毛球场出发。我们把注意力放在真正影响运动体验的细节：面料克重、汗液扩散、肩背活动空间、下摆稳定性，以及连续多局比赛后的舒适度。</p><p>我们不追求复杂。只把一件羽毛球服该做好的事情做好。</p><a class="btn" href="about.html">CShang 品牌理念</a></div><div class="specs"><div class="spec"><b>360°</b><span>挥拍活动空间设计</span></div><div class="spec"><b>QUICK</b><span>快速排汗理念</span></div><div class="spec"><b>LIGHT</b><span>轻量运动面料</span></div><div class="spec"><b>01</b><span>专注羽毛球运动</span></div></div></div></section>
+
+<footer class="footer"><div class="wrap">
+<div class="footer-grid">
+<div><div class="logo">C<span>Shang</span></div><p>羽毛球服饰 · 为每一次挥拍而生。</p></div>
+<div><h4>购物</h4><a href="shop.html?category=new">新品系列</a><br><a href="shop.html">全部产品</a><br><a href="shop.html?gender=men">男款</a><br><a href="shop.html?gender=women">女款</a></div>
+<div><h4>服务</h4><a href="#">尺码指南</a><br><a href="#">配送说明</a><br><a href="#">退换政策</a><br><a href="about.html">关于 CShang</a></div>
+<div><h4>品牌合作</h4><a href="team.html">俱乐部 / 球队定制</a><br><p>service@cshang.com</p></div>
+</div><div class="copy">© 2026 CShang. All rights reserved.</div>
+</div></footer>
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer"><div class="drawer-head"><h2>购物袋</h2><button class="iconbtn" onclick="closeCart()">×</button></div><div class="drawer-items" id="cartItems"></div><div class="total"><div class="total-row"><span>合计</span><span id="drawerTotal">¥0</span></div><a class="btn dark" style="display:block;text-align:center" href="checkout.html">去结算</a></div></aside>
+<script src="assets/app.js"></script><script>renderFeatured();initShell();</script></body></html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>确认订单 | CShang</title><meta name="description" content="CShang 羽毛球服饰官方商城。"><link rel="stylesheet" href="assets/style.css"></head><body>
+<div class="topbar">CShang 新品系列上线 · 首单享专属优惠 · 为每一次挥拍而生</div>
+<header class="nav"><div class="nav-inner">
+<button class="iconbtn mobile" onclick="location.href='shop.html'">☰</button>
+<a class="logo" href="index.html">C<span>Shang</span></a>
+<nav class="navlinks">
+<a href="shop.html?category=new">新品</a><a href="shop.html?category=competition">比赛服</a><a href="shop.html?category=training">训练服</a><a href="shop.html?gender=men">男款</a><a href="shop.html?gender=women">女款</a><a href="shop.html?category=team">队服定制</a>
+</nav>
+<div class="actions"><button class="iconbtn" onclick="alert('搜索功能已预留，可继续接入全文搜索。')">⌕</button><button class="iconbtn" onclick="openCart()">🛒<sup class="cart-count" id="cartCount">0</sup></button></div>
+</div></header>
+
+<section class="page-head"><div class="wrap"><div class="kicker">CHECKOUT</div><h1>确认订单</h1><p>填写收货信息，提交后生成订单。</p></div></section>
+<main class="wrap checkout"><section class="form-card"><div id="checkoutNotice"></div><h2>收货信息</h2>
+<form id="checkoutForm">
+<div class="field"><label>姓名 *</label><input name="name" required placeholder="请输入收货人姓名"></div>
+<div class="field"><label>手机 *</label><input name="phone" required pattern="[0-9+ -]{7,20}" placeholder="请输入联系电话"></div>
+<div class="field"><label>省 / 州 *</label><input name="province" required placeholder="例如：黑龙江省"></div>
+<div class="field"><label>城市 *</label><input name="city" required placeholder="例如：哈尔滨市"></div>
+<div class="field"><label>详细地址 *</label><textarea name="address" required placeholder="街道、门牌号、楼栋房间等"></textarea></div>
+<div class="field"><label>备注</label><textarea name="note" placeholder="尺码备注、配送要求等"></textarea></div>
+<button class="btn dark" style="width:100%" type="submit">提交订单</button>
+</form></section><aside class="summary"><h2>订单摘要</h2><div id="summary"></div></aside></main>
+
+<footer class="footer"><div class="wrap">
+<div class="footer-grid">
+<div><div class="logo">C<span>Shang</span></div><p>羽毛球服饰 · 为每一次挥拍而生。</p></div>
+<div><h4>购物</h4><a href="shop.html?category=new">新品系列</a><br><a href="shop.html">全部产品</a><br><a href="shop.html?gender=men">男款</a><br><a href="shop.html?gender=women">女款</a></div>
+<div><h4>服务</h4><a href="#">尺码指南</a><br><a href="#">配送说明</a><br><a href="#">退换政策</a><br><a href="about.html">关于 CShang</a></div>
+<div><h4>品牌合作</h4><a href="team.html">俱乐部 / 球队定制</a><br><p>service@cshang.com</p></div>
+</div><div class="copy">© 2026 CShang. All rights reserved.</div>
+</div></footer>
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer"><div class="drawer-head"><h2>购物袋</h2><button class="iconbtn" onclick="closeCart()">×</button></div><div class="drawer-items" id="cartItems"></div><div class="total"><div class="total-row"><span>合计</span><span id="drawerTotal">¥0</span></div><a class="btn dark" style="display:block;text-align:center" href="checkout.html">去结算</a></div></aside>
+<script src="assets/app.js"></script>
+<script>
+function renderSummary(){
+ const cart=getCart(),el=document.getElementById("summary");
+ if(!cart.length){document.getElementById("checkoutNotice").innerHTML='<div class="notice">购物袋为空，请先选择商品。</div>';document.getElementById("checkoutForm").style.display="none";el.innerHTML='<a class="btn dark" href="shop.html">返回商城</a>';return}
+ el.innerHTML=cart.map(i=>`<div class="summary-line"><span>${i.name}<br><small class="muted">${i.color} · ${i.size} × ${i.qty}</small></span><b>${money(i.price*i.qty)}</b></div>`).join("")+`<div class="summary-total"><span>合计</span><span>${money(cartTotal())}</span></div><p class="muted" style="font-size:12px">当前为商城演示模式。接入支付网关后可在此处进入微信支付 / 支付宝 / Stripe。</p>`;
+}
+document.getElementById("checkoutForm").addEventListener("submit",e=>{
+ e.preventDefault();const cart=getCart();if(!cart.length)return;
+ const fd=new FormData(e.target),order={orderNumber:"CS"+Date.now().toString().slice(-10),customer:{name:fd.get("name"),phone:fd.get("phone"),province:fd.get("province"),city:fd.get("city"),address:fd.get("address"),note:fd.get("note")},items:cart,total:cartTotal(),status:"待付款",createdAt:new Date().toISOString()};
+ const orders=JSON.parse(localStorage.getItem("cshang_orders")||"[]");orders.push(order);localStorage.setItem("cshang_orders",JSON.stringify(orders));localStorage.removeItem("cshang_cart");location.href="order.html?order="+order.orderNumber;
+});
+renderSummary();initShell();
+</script>
+</body></html>
